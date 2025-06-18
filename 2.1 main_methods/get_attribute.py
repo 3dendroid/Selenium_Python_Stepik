@@ -9,13 +9,12 @@ try:
     browser = webdriver.Chrome()
     browser.get(link)
 
-    x_element = browser.find_element(By.CSS_SELECTOR, "#input_value")
-    x = x_element.text
-
+    treasure = browser.find_element(By.CSS_SELECTOR, "#treasure")
+    treasure_value = treasure.get_attribute("valuex")
 
     def calc(x):
         return str(math.log(abs(12 * math.sin(int(x)))))
-    y = calc(x)
+    y = calc(treasure_value)
 
     answer = browser.find_element(By.XPATH, "//input[@id='answer']")
     answer.send_keys(y)
@@ -28,8 +27,6 @@ try:
 
     submit_button = browser.find_element(By.XPATH, "//button[@type='submit']")
     submit_button.click()
-
-
 
 finally:
     # ожидание чтобы визуально оценить результаты прохождения скрипта
